@@ -1,0 +1,19 @@
+
+.first topic
+This is a topic about blah
+And being blah there is blah
+
+.server 	:start a webserver
+Clirc has a builtin webserver and blah blah blah
+
+.usage
+clirc [-s] [-h] [config]
+-s	Start clirc in server mode (noninteractive)
+-h	This message
+config	Configuration file to run
+
+.bouncer	:Using the bouncer
+Welcome to clirc bouncer.  Type in server <servername> to set a server
+
+.loginserver		:server 
+Clirc remote login access
