@@ -85,7 +85,7 @@ int dumpvals()
 
 int setvals(void*nothing)
 {	
-	static int m, n, curcont, ncon;
+	static int m, curcont, ncon;
 	FILE*ifile;
 	char*sfile, 
 		*in=(char*)nothing, 
@@ -122,7 +122,6 @@ int setvals(void*nothing)
 	CHARSTATE(parsetable, ',', P_REPL);
 	tableparse(parsetable, &bufin, &g_out);
 	pcur=g_out;
-	n=0;
 	setcolor(CYAN);
 	godark();
 	while(*pcur)

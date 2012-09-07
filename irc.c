@@ -10,7 +10,6 @@ void PipeHandler(int Signal)
 
 int ircsend(char*msg)
 {	
-	static int t=0;	
 #ifdef _DEBUG_
 	wprintf("%s",msg);
 #endif
@@ -22,23 +21,23 @@ int ircsend(char*msg)
 	{
 		return(FALSE);
 	}
-        if(poll(g_ufds,MAX_FDS,10))
-        {
+  if(poll(g_ufds,MAX_FDS,10))
+  {
 	 	if(g_ufds[0].revents&badstuff)
-                {
+    {
 		 	message("Connection dropped!",RED,0,0);
 			ircdisconnect(NULL);
 			g_ufds[0].revents=0;
 			return(FALSE);
-                }
+    }
 	}
 /*	if(time(NULL)==t)
 		return(FALSE);
 //Want to avoid being kicked for flooding, but also want a reasonable time
 */	msg=getbuffer("out");
-	if(msg)
+	if(msg) {
 		send(g_sd,msg,strlen(msg),0);
-	t=time(NULL);
+  }
 	return(TRUE);
 }
 

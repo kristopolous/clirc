@@ -9,12 +9,7 @@
  */
 void getuser(char*t_in,struct user*ret)
 {	
-	static int 	n=0,
-			len;
 	char * in = t_in;
-
-	n=0;
-	len=strlen(in);
 
 	in++; //dump colon
 	ret->name=in;
@@ -412,7 +407,7 @@ void getstuff(int todo)
 		prl=nxl;	
 	}
 	unparse(&g_out);
-	realloc(toprint,strlen(toprint)+1);
+	toprint = realloc(toprint,strlen(toprint)+1);
 	switch(todo)
 	{	case SAVE:
 			if(!saveit)

@@ -180,18 +180,10 @@ void close_connection(struct server*toclose, int m)
 }
 
 //Poll an existing connection 
-<<<<<<< server.c
-void poll_connection(struct server*topoll,int m)
-{
-	static unsigned char*buf=0;
-	static int c,d,t;
-
-=======
 void poll_connection(struct server*topoll, int m)
 {	
 	static char*buf=0;
 	static int c, d, t;
->>>>>>> 1.17
 	if(!buf)
 	{
 		buf=malloc(MEDIUM);
@@ -200,66 +192,35 @@ void poll_connection(struct server*topoll, int m)
 	
 	if(!(poll(g_ufds, topoll->curfd[m]+1, 0)
 		&&g_ufds[topoll->curfd[m]].revents))
-<<<<<<< server.c
-	{	
-		if((time(NULL)-topoll->last[m])>topoll->timeout)
-		{
-			close_connection(topoll,m);	
-		}
-=======
 	{
 		if((time(NULL)-topoll->last[m])>topoll->timeout)
 		{
 			close_connection(topoll, m);	
 		}
->>>>>>> 1.17
 		return;
 	}
 	c=topoll->cur[m];
 	topoll->curcon=m;
 //Checks for buffers
 	if(topoll->buffers)
-<<<<<<< server.c
 	{
 		for(d = 0;d < TINY; d++)
 		{
 			if(!topoll->buffers[d].name)
 			{
-=======
-	{	
-		for(d=0;d<TINY;d++)
-		{	
-			if(!topoll->buffers[d].name)
-			{
->>>>>>> 1.17
 				break;	
-<<<<<<< server.c
 			}
 			t = *(topoll->buffers[d].size);	
 
-=======
-			}
-			t=*(topoll->buffers[d].size);	
-
->>>>>>> 1.17
 			if(!t)
 			{
 				break;
-<<<<<<< server.c
 			}
 			if(topoll->buffers[d].curpoint < t)
 			{	
 				if(topoll->buffunction)
 				{
 					topoll->buffunction(topoll);
-=======
-			}
-			if(topoll->buffers[d].curpoint<t)
-			{
-				if(topoll->buffunction)
-				{
-					topoll->buffunction(topoll);
->>>>>>> 1.17
 					break;
 				}
 			}
@@ -273,16 +234,11 @@ void poll_connection(struct server*topoll, int m)
 		ZERO(buf, MEDIUM);
 		read(c, buf, MEDIUM);
 		if(topoll->logfd)
-<<<<<<< server.c
 		{
 			write(topoll->logfd,buf,MEDIUM);
 		}
-=======
-			write(topoll->logfd, buf, MEDIUM);
->>>>>>> 1.17
 		topoll->last[m]=time(NULL);
 		if((topoll->inifunction&&topoll->inistatus[m]==DONE)||!topoll->inifunction)
-<<<<<<< server.c
 		{
 			if(topoll->logfd>0)	/*Logging enabled*/
 			{
@@ -290,38 +246,19 @@ void poll_connection(struct server*topoll, int m)
 				write(topoll->logfd,": ",2);
 				write(topoll->logfd,buf,strlen(buf));
 				write(topoll->logfd,"\r\n",2);
-=======
-		{	if(topoll->logfd>0)	/*Logging enabled*/
-			{	write(topoll->logfd, numtotime(time(0)), 16);
-				write(topoll->logfd, ": ", 2);
-				write(topoll->logfd, buf, strlen(buf));
-				write(topoll->logfd, "\r\n", 2);
->>>>>>> 1.17
 			}	
-<<<<<<< server.c
 			switch((topoll->function)(buf,topoll))
 			{
 				case DONE:	
 					close_connection(topoll,m);	
-=======
-			switch((topoll->function)(buf, topoll))
-			{	case DONE:	
-					close_connection(topoll, m);	
->>>>>>> 1.17
 					break;
 			}
-<<<<<<< server.c
 		}
 		else
 		{
 			switch((topoll->inifunction)(buf,topoll,m))
 			{
 				case DONE:	
-=======
-		}else
-		{	switch((topoll->inifunction)(buf, topoll, m))
-			{	case DONE:	
->>>>>>> 1.17
 					topoll->inistatus[m]=DONE;	
 					break;
 				case FAIL:
@@ -335,37 +272,21 @@ void poll_connection(struct server*topoll, int m)
 
 
 void poll_servers()
-<<<<<<< server.c
-{	
-	static int n,m;
-=======
 {
 	static int n, m;
->>>>>>> 1.17
 	static struct server*temp;
 
 	for(n=0;n<bigserver.count;n++)
-<<<<<<< server.c
-	{	if(bigserver.servers[n]->isactive)
-		{	
-			temp=bigserver.servers[n];	
-=======
 	{	
 		if(bigserver.servers[n]->isactive)
 		{
 			temp=bigserver.servers[n];	
->>>>>>> 1.17
 			poll_server(temp);
 			for(m=0;m<=temp->concount;m++)
-<<<<<<< server.c
 			{
 				if(temp->isconnected[m])	
 				{
 					poll_connection(temp,m);
-=======
-			{	if(temp->isconnected[m])	
-				{	poll_connection(temp, m);
->>>>>>> 1.17
 					wupdate();
 				}
 			}
@@ -530,12 +451,11 @@ int password(char*in, struct server*s, int m)
 //Should have some sanity checks so that we are not overwriting possible previous buffer links
 int serverassociate(struct server*s, struct con*c)
 {
-	static int n, m;
+	static int n;
 #ifdef _DEBUG_
 	wprintf("DEBUG: entering server associate\n");
 #endif
 	n=0;
-	m=0;
 	loop1:
 		if(c->buffers[n].name)
 		{

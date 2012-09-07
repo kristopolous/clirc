@@ -78,12 +78,10 @@ int plaincline(char *in, struct server*toproc)
 
 int cline(struct ccom**_coms, char color, char *prpt)
 { 	
-	static char	**cin, 
-			ctmp, 
-			*pprm;
+	static char	**cin, ctmp;
 	static int 	
 		cur = -1,
-   	    	c = -102913,
+   	c = -102913,
 		csize = 64, 
 		scroll = 0, 	
 		prompt = 0,
@@ -103,7 +101,6 @@ int cline(struct ccom**_coms, char color, char *prpt)
 		}
 		lc = 0;
 	}
-	pprm = prpt;
 	if(!prompt)
 	{	
 		tcsetattr(clstdin, TCSANOW, &cltoch);	

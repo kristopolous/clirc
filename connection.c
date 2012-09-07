@@ -154,8 +154,7 @@ int findcon(char*server, char*nick, int number)
 
 int conadd(void*in)
 {
-	static struct con*tomake;
-	tomake=newcon();	
+	newcon();	
 	return(TRUE);
 }
 

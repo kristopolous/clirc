@@ -45,32 +45,15 @@ int bouncewelcome(char*args, struct server*s, int m)
 }
 
 int bouncebuf(struct server*s)
-<<<<<<< bouncer.c
 {	
 	static short d;	
-
-=======
-{	
-	static short d;	
->>>>>>> 1.12
 	d=0;
 
 	loop:
-<<<<<<< bouncer.c
-		if(*(s->buffers[d].size) > s->buffers[d].curpoint)
-		{	
-			s->buffers[d].curpoint++;	
-		//	protected_write(s,(*(s->buffers[d].data))[s->buffers[d].curpoint]);
-=======
 		if(*(s->buffers[d].size)>s->buffers[d].curpoint)
 		{	s->buffers[d].curpoint++;	
 		//	protected_write(s, (*(s->buffers[d].data))[s->buffers[d].curpoint]);
-		}else	//buffers are updated
-		{
-			return(TRUE);
->>>>>>> 1.12
-		}
-		else	//buffers are updated
+    } else	//buffers are updated
 		{
 			return(TRUE);
 		}
