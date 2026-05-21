@@ -88,7 +88,7 @@ void activate_server(struct server**todo_)
 { 
 	static 	int		port=0;
 	struct 	sockaddr_in 	name;
-	struct	hostent 	*gethostbyaddr();
+
 	struct 	server*todo	=(*todo_);
 	todo->addr.sa_family=AF_INET;
 	strcpy(todo->addr.sa_data, "somename");

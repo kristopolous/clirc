@@ -125,8 +125,7 @@ int ircconnect(void *null)
 { 	
 	struct sockaddr_in	name;
 	struct hostent	
-		*hp,  
-		*gethostbyname();
+		*hp;
 
 	int 	c=htons((int)qget(gp_curcont, "port")), 
 		count=(int)qnget(g_ircvar, 9);

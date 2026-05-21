@@ -1,7 +1,7 @@
 #ifndef _DEFINES_
 #define _DEFINES_
 
-#define VERSION  "0.0.1.9.3c"
+#define VERSION  "0.0.1.9.4"
 
 #include<arpa/inet.h>
 #include<fcntl.h>
