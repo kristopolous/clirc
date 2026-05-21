@@ -299,8 +299,8 @@ void getstuff(int todo)
 
 					if(!strncmp("action",comd,6))
 					{
-						sprintf(toprint, "%s[1;35m*** %s[1;32m %s\n",
-							toprint, ret.name, combmessage(t_out,5));
+					sprintf(toprint, "%s\033[1;35m*** %s\033[1;32m %s\n",
+						toprint, ret.name, combmessage(t_out,5));
 					}
 					else if(!strncmp("version",comd,6))
 					{ 
@@ -325,7 +325,7 @@ void getstuff(int todo)
 						ircsend(temp);
 					}
 				}else
-				sprintf(toprint,"%s[1;35m<%s>[1;32m %s\n",
+				sprintf(toprint,"%s\033[1;35m<%s>\033[1;32m %s\n",
 					toprint,ret.name,getmessage(t_out,0));
 				//twasn't a channel!
 				if(*chan!='#')
@@ -419,7 +419,7 @@ void getstuff(int todo)
 			break;
 		case PRINT:
 			wprintf("****TOPRINT****\n");
-			wprintf("[1;32m%s[0m",toprint);
+			wprintf("\033[1;32m%s\033[0m",toprint);
 			break;
 		case DUMP:
 			break;

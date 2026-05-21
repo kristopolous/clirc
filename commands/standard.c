@@ -159,7 +159,7 @@ int ircconnect(void *null)
 		mainloop();
 		if(count-- == 0)
 		{
-			wprintf("[1D");
+			wprintf("\033[1D");
 			message("Failed to connect!", RED, 1, LEVEL);
 			loop1:
 				if(incrunregbuffer((struct buffers_*)gp_curcont->value[0]))
@@ -367,7 +367,7 @@ int showmesg(void *nothing)
 
 				for(m=0;m<g_msg[n].n;m++)
 				{
-					wprintf("     [0m%d", g_msg[n].times[m]);
+					wprintf("     \033[0m%d", g_msg[n].times[m]);
 					message(g_msg[n].message[m], YELLOW, 0, 0);
 				}
 				dospace(0);

@@ -306,7 +306,7 @@ char*rprintf(char*fmt, ...)
 
 void do_exit(int n)
 {	
-	printf("[0m");
+	printf("\033[0m");
 	exit(n);
 }
 
@@ -379,26 +379,26 @@ void printstring(char*str, int n)
 {
 	if(prespace&&g_curs->hascolor)
 	{
-		wprintf("[ % dC", prespace);	
+		wprintf("\033[%dC", prespace);	
 	}
 	if(n) 	
 	{
 		if(g_curs->hascolor)
 		{
-			wprintf("[ % d;31m[ % d]:", brightness, n);
+			wprintf("\033[%d;31m[%d]:", brightness, n);
 		}	
 		else
 		{
-			wprintf("[ % d]:", n);
+			wprintf("[%d]:", n);
 		}
 	}
 	if(g_curs->hascolor)
 	{
-		wprintf("[ % d;3 % dm % s", brightness, curcolor, str);
+		wprintf("\033[%d;3%dm%s", brightness, curcolor, str);
 	}
 	else
 	{
-		wprintf(" % s", str);
+		wprintf("%s", str);
 	}
 	if(str[strlen(str) - 1] > 31)
 	{
@@ -436,12 +436,12 @@ void printvalue(char*name, void*value, int type, int spaces)
 	static struct buffers_*tmp;
 	if(g_curs->hascolor)
 	{
-		wprintf("[%dC[%d;3%dm", prespace, brightness, curcolor);
+		wprintf("\033[%dC\033[%d;3%dm", prespace, brightness, curcolor);
 	}
 	if(name == NULL)
 	{	
 		name = CHR(20);
-		strcpy(name, " < < UNKNOWN > > ");
+		strcpy(name, "<UNKNOWN>");
 	}	
 	if(*name > 'Z')
 	{
@@ -454,7 +454,7 @@ void printvalue(char*name, void*value, int type, int spaces)
 	
 	if(g_curs->hascolor)
 	{	
-		wprintf("[%dC[%d;33m", spaces - strlen(name), brightness);
+		wprintf("\033[%dC\033[%d;33m", spaces - strlen(name), brightness);
 	}
 	else
 	{
@@ -469,15 +469,12 @@ void printvalue(char*name, void*value, int type, int spaces)
 				case TRUE: 
 					wprintf("True");
 					break;
-
 				case FALSE:
 					wprintf("False");
 					break;
-
 				case WAITING:
-					wprintf("Waiting . . .");
+					wprintf("Waiting...");
 					break;
-
 				default:
 					wprintf("Unknown");
 					break;
@@ -498,12 +495,11 @@ void printvalue(char*name, void*value, int type, int spaces)
 			else
 			{
 				wprintf("<No Value>");
-
 				if(!tmp->curpoint&&tmp->size > 1)
 				{
 					if(g_curs->hascolor)
 					{
-						wprintf("[%dC[1;3%dm<<[1;3%dm", 2, MAGENTA, YELLOW);
+						wprintf("\033[%dC\033[1;3%dm<<\033[1;3%dm", 2, MAGENTA, YELLOW);
 					}
 					else
 					{
@@ -511,18 +507,17 @@ void printvalue(char*name, void*value, int type, int spaces)
 					}
 				}
 				wprintf("\n");
-
 				if(g_curs->hascolor)
 				{	
 					for(n = 1;n < tmp->size;n++)
 					{
 						if(n == tmp->curpoint)
 						{
-							wprintf("[%dC[1;3%dm<<[1;3%dm\n", spaces - 2, MAGENTA, YELLOW);
+							wprintf("\033[%dC\033[1;3%dm<<\033[1;3%dm\n", spaces - 2, MAGENTA, YELLOW);
 						}
 						else
 						{
-							wprintf("[%dC", spaces);
+							wprintf("\033[%dC", spaces);
 						}
 						wprintf("%s\n", tmp->data[n]);
 					} 
@@ -586,7 +581,7 @@ void patience()
 	static char pos = 0;
 	pos++;
 	pos = pos % 4;
-	wprintf("[1D%c", loop[(int)pos]);
+	wprintf("\033[1D%c", loop[(int)pos]);
 	fflush(stdout);
 	return;
 }

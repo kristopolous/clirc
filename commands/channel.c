@@ -65,7 +65,7 @@ int affinity(void*var)
 	{ 	whois(hnames[n]);
 		patience();
 	}
-	printf("[1D");
+	printf("\033[1D");
 	return(TRUE);
 }
 

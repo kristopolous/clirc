@@ -84,7 +84,7 @@ int main(int argc,char*argv[])
 
 	g_canjoin	=TRUE;
 	bigserver.count	=0;
-	towrite		=malloc(MEDIUM);
+	towrite		=calloc(1, MEDIUM);
 
 	qmain.size=0;
 	qaddtobig(g_ircvar,"Main Variables");
@@ -277,7 +277,7 @@ int main(int argc,char*argv[])
 
         g_con.curpoint=0;
 
-	printf("[0m - - - - -/\\ | ^ - - - - - - - -\n");
+	printf("\033[0m - - - - -/\\ | ^ - - - - - - - -\n");
 	printf("|        |   | | |/\\ /\\         | %s",VERSION);
 #ifdef _DEBUG_
 	printf("-DEBUG");
